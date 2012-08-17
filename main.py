@@ -128,7 +128,6 @@ class Game:
 
 		#draw player on screen
 		self.screen.blit(self.p1.image, self.p1.rect)
-		print self.p1.image
 		pygame.draw.line(self.screen, (0,0,0), (000, 328), (800, 328))
 
 	def handleEvents(self):
@@ -151,13 +150,7 @@ class Game:
 			elif event.type == KEYUP:
 				if event.key == K_ESCAPE:
 					self.running = False
-					self.keyUp(event.key)
-				elif keys[K_LSHIFT]:
-					self.keyUp(K_LSHIFT)
-				elif keys[K_s]:
-					self.keyUp(K_s)
-				elif keys[K_r]:
-					self.keyUp(K_r)
+				self.keyUp(event.key)
 			elif event.type == MOUSEBUTTONUP:
 				self.mouseUp(event.button, event.pos)
 			elif event.type == MOUSEMOTION:
