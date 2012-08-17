@@ -5,4 +5,4 @@ All game dev files.
 Game_1
 ---------
 
-![Game Beginnings](https://github.com/hortonew/pygame-dev/raw/master/1_game/images/screenshot.png)
+![Game Beginnings](https://raw.github.com/hortonew/2dfighter/master/images/screenshot.png)
