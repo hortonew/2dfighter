@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import os
- 
+
 class PygameHelper:
     def __init__(self):
 		pass
