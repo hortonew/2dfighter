@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from helpers import *
-print(dir())
 import pygame
 from pygame.locals import *
 from math import e, pi, cos, sin, sqrt
@@ -14,16 +13,15 @@ WINDOW_SIZE = (800, 600)
 
 
 class Game:
-    def __init__(self, size, fill):
+    def __init__(self):
         self.running = False
         self.clock = pygame.time.Clock() #to track FPS
-        self.size = size
         pygame.init()
-        self.screen = pygame.display.set_mode(size)
-        self.screen.fill(fill)
+        self.screen = pygame.display.set_mode(WINDOW_SIZE)
+        self.screen.fill((255,255,255))
         pygame.display.flip()
         self.fps= 0
-        self.w, self.h = size[0], size[1]
+        self.w, self.h = WINDOW_SIZE[0], WINDOW_SIZE[1]
         helpers = pygamehelper.PygameHelper()
         
         #coordinates on sprite sheet for each image
@@ -31,6 +29,8 @@ class Game:
         self.p1 = player.Player(helpers.get_spritesheet('../images/iceman_sprite.png', p1_coords))
 
     def update(self):
+		#update player's position
+        self.p1.update()
         pass
     
     def keyUp(self, key):
@@ -115,8 +115,6 @@ class Game:
         #clear the screen
         self.screen.fill((255,255,255))
         
-        #if player is on the ground and he's facing right
-        self.p1.update()
         
         #write text on screen
         self.setText()
@@ -163,5 +161,5 @@ class Game:
             pygame.display.flip()
             self.clock.tick(self.fps)
 
-g = Game(WINDOW_SIZE, ((255,255,255)))
+g = Game()
 g.mainLoop(30)
