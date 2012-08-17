@@ -7,10 +7,8 @@ from random import uniform
 from helpers import pygamehelper
 from classes import player
 
-global groundY
-groundY = 300
 WINDOW_SIZE = (800, 600)
-
+groundY = 300
 
 class Game:
 	def __init__(self):
@@ -119,16 +117,17 @@ class Game:
     
         
 	def draw(self):
+		global groundY
+		ground = groundY + 27 # groundY plus height of player sprite
 		#clear the screen
 		self.screen.fill((255,255,255))
-
 
 		#write text on screen
 		self.setText()
 
 		#draw player on screen
 		self.screen.blit(self.p1.image, self.p1.rect)
-		pygame.draw.line(self.screen, (0,0,0), (000, 328), (800, 328))
+		pygame.draw.line(self.screen, (0,0,0), (000, ground), (800, ground))
 
 	def handleEvents(self):
 		keys = pygame.key.get_pressed()  #checking pressed keys
