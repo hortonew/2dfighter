@@ -20,11 +20,26 @@ class Game:
 		pygame.display.flip()
 		self.fps= 0
 		self.w, self.h = WINDOW_SIZE[0], WINDOW_SIZE[1]
-		helpers = pygamehelper.PygameHelper()
-
-		#coordinates on sprite sheet for each image
-		p1_coords = [(0, 0, 22, 27), (24, 0, 24, 27), (50, 0, 24, 27), (78, 0, 21, 27), (104, 0, 19, 27)]
-		self.p1 = player.Player(helpers.get_spritesheet('../images/iceman_sprite.png', p1_coords))
+		self.helpers = pygamehelper.PygameHelper()
+		
+		#select which character for player one.  start at 1
+		self.p1 = self.select_character(1)
+		
+	def select_character(self, i):
+		#list of characters (lists of coordinates and image paths)
+		characters = [
+			[
+				#character 1
+				[(0, 0, 22, 27), (24, 0, 24, 27), (50, 0, 24, 27), (78, 0, 21, 27), (104, 0, 19, 27)],
+				'../images/iceman_sprite.png'
+			]
+		]
+		coords = characters[i-1][0] # list of coords
+		i_path = characters[i-1][1] # image path
+		
+		character = player.Player(self.helpers.get_spritesheet(i_path, coords))
+		
+		return character
 
 	def update(self):
 		#update player's position
