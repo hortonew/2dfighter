@@ -40,7 +40,7 @@ class Game:
         #[speed], SpriteImage, 1 if x flip, 1 if y flip
         
         if key == K_LSHIFT:
-            #normal speed sprint
+            #normal speed
             self.p1.x_speed = self.p1.starting_x_speed
         elif key == K_s:
             #stand up

@@ -6,7 +6,6 @@ class Player(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		self.images = images
 		self.image = self.images[0]
-		#self.rect = self.image.get_rect()
 		self.rect = self.image.get_rect().move([200, 300])
 		
 		#last image to return to after odd movements like jumping
@@ -16,9 +15,6 @@ class Player(pygame.sprite.Sprite):
 		#starting_x_speed allows the x_speed to return to normal after sprinting
 		self.starting_x_speed = 9
 		self.x_speed = 9
-		
-		#self.starting_y_speed = 9
-		#self.y_speed = 9
 		
 		#current speed of player
 		self.speed = [0, 0]
