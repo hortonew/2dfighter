@@ -39,8 +39,8 @@ class Game:
         #update speed how to
         #[speed], SpriteImage, 1 if x flip, 1 if y flip
         
+            #normal speed 
         if key == K_LSHIFT:
-            #normal speed
             self.p1.x_speed = self.p1.starting_x_speed
         elif key == K_s:
             #stand up
@@ -114,9 +114,6 @@ class Game:
     def draw(self):
         #clear the screen
         self.screen.fill((255,255,255))
-        
-        self.p1.update();
-        #if the player hit the jump button, and the player isn't on the ground, run the jump code
         
         #if player is on the ground and he's facing right
         self.p1.update()

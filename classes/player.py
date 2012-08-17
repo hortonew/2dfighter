@@ -1,5 +1,5 @@
 import pygame
-gravity = 0.5
+gravity = 1.3
 groundY = 300
 class Player(pygame.sprite.Sprite):
 	def __init__(self, images):
@@ -29,7 +29,7 @@ class Player(pygame.sprite.Sprite):
 		self.maxVSpeed = 3
 		
 		#controls what the starting vSpeed gets set to when jump is pressed
-		self.jumpForce = 8
+		self.jumpForce = 11
 		
 		#starting y value of player (ground)
 		self.y = 300
