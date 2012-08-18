@@ -100,7 +100,6 @@ class Player(pygame.sprite.Sprite):
 	def update(self):
 		#update the projectiles of this player:
 		purge = []
-		print self.currentAnim
 		for i, p in enumerate(self.projectiles):
 			p.update()	
 			#delete the projectile if it's off the screen
