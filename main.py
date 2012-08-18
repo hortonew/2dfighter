@@ -42,7 +42,6 @@ class Game:
 	def update(self):
 		#update player's position
 		self.p1.update()
-		pass
     
 	def keyUp(self, key):
 		#check if any key was released, but only set movement to false if no other movement key is pressed down
@@ -74,6 +73,8 @@ class Game:
 				elif key == K_d:
 					#move right
 					self.p1.updateSpeed([self.p1.x_speed, 0], 0, 0, 0)
+				elif key == K_LCTRL:
+					self.p1.shoot()
 				elif key == K_LSHIFT:
 					#sprint
 					self.p1.x_speed = 15
@@ -107,6 +108,7 @@ class Game:
 		self.text3 = font2.render('SHIFT - Sprint', True, (0,0,0), (255,255,255))
 		self.text4 = font2.render('WASD - Move', True, (0,0,0), (255,255,255))
 		self.text5 = font2.render('R - Block', True, (0,0,0), (255,255,255))
+		self.text6 = font2.render('CTRL - Shoot', True, (0,0,0), (255,255,255))
 
 		self.text1Rect = self.text1.get_rect()
 		self.text1Rect.centerx = self.w - 200
@@ -128,11 +130,16 @@ class Game:
 		self.text5Rect.centerx = self.w - 200
 		self.text5Rect.centery = 130
 
+		self.text6Rect = self.text6.get_rect()
+		self.text6Rect.centerx = self.w - 200
+		self.text6Rect.centery = 145
+
 		self.screen.blit(self.text1, self.text1Rect)
 		self.screen.blit(self.text2, self.text2Rect)
 		self.screen.blit(self.text3, self.text3Rect)
 		self.screen.blit(self.text4, self.text4Rect)
 		self.screen.blit(self.text5, self.text5Rect)
+		self.screen.blit(self.text6, self.text6Rect)
         
 	def draw(self):
 		global groundY
@@ -140,6 +147,10 @@ class Game:
 		self.screen.fill((255,255,255)) #clear the screen
 		self.setText() #write text on screen
 		self.screen.blit(self.p1.image, self.p1.rect) #draw player on screen
+		#draw the players projectiles:
+		for p in self.p1.projectiles:
+			pygame.draw.rect(self.screen, p.color, pygame.rect.Rect(p.rect))
+
 		pygame.draw.line(self.screen, (0,0,0), (000, ground), (800, ground)) #draw line for ground
 
 	def handleEvents(self):

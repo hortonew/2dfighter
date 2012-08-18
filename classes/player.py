@@ -1,12 +1,17 @@
 import pygame
+import projectile
 gravity = 1.3
 groundY = 300
+WINDOW_SIZE = (800, 600)
 class Player(pygame.sprite.Sprite):
 	def __init__(self, images):
 		pygame.sprite.Sprite.__init__(self)
 		self.images = images
 		self.image = self.images[0]
 		self.rect = self.image.get_rect().move([200, 300])
+
+		#an array to be filled with player's projectiles
+		self.projectiles = []
 		
 		#last image to return to after odd movements like jumping
 		self.last_image = self.image
@@ -65,6 +70,9 @@ class Player(pygame.sprite.Sprite):
 		#move the player
 		if spd != [0,0]:
 			self.rect = self.rect.move(self.speed)
+	def shoot(self):
+		self.projectiles.append(projectile.Projectile(affected_by_gravity=False, x=self.rect.x, y=self.rect.y, direction=-1, rect=pygame.rect.Rect(self.rect.x,self.rect.y,10,10)))
+
 		
 	def jump(self):
 		global gravity
@@ -86,6 +94,16 @@ class Player(pygame.sprite.Sprite):
 		self.rect = self.rect.move(0, self.vSpeed)
 
 	def update(self):
+		#update the projectiles of this player:
+		purge = []
+		for i, p in enumerate(self.projectiles):
+			p.update()	
+			#delete the projectile if it's off the screen
+			if p.rect.x > WINDOW_SIZE[0]:
+				purge.append(i)
+		for i in reversed(purge):
+			del(self.projectiles[i])
+
 		if self.isJumping == True:
 			self.jump()
 			if self.speed[0] > 0:
