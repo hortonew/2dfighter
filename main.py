@@ -153,16 +153,17 @@ class Game:
 		self.screen.blit(self.text4, self.text4Rect)
 		self.screen.blit(self.text5, self.text5Rect)
 		self.screen.blit(self.text6, self.text6Rect)
+	
+	def setBackground(self):
+		self.screen.blit(self.starfield, self.starfield_rect)
+		self.screen.blit(self.city, self.city_rect)
         
 	def draw(self):
 		global groundY
 		ground = groundY + 27 # groundY plus height of player sprite
 		self.screen.fill((255,255,255)) #clear the screen
 		
-		#reserved for background images
-		self.screen.blit(self.starfield, self.starfield_rect)
-		self.screen.blit(self.city, self.city_rect)
-		
+		self.setBackground() # blit the background images
 		self.setText() #write text on screen
 		self.screen.blit(self.p1.image, self.p1.rect) #draw player on screen
 		#draw the players projectiles:
