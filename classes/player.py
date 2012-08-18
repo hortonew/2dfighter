@@ -24,6 +24,7 @@ class Player(pygame.sprite.Sprite):
 		
 		self.isJumping = False
 		self.isDucking = False
+		self.isBlocking = False
 		
 		#acceleration of player in upward direction
 		self.vSpeed = 0
