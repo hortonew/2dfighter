@@ -12,7 +12,7 @@ class PygameHelper:
     
         #create a path to the image passed in, and convert to pygame image
         mypath = os.path.dirname( os.path.realpath( __file__) )
-        image = pygame.image.load( os.path.join(mypath, im) ).convert_alpha()
+        image = pygame.image.load( os.path.join(mypath, '../images/' + im) ).convert_alpha()
     
         #add each sprite to the sprite sheet array
         for set in coords:

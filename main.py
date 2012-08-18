@@ -31,14 +31,12 @@ class Game:
 			[
 				#character 1
 				[(0, 0, 22, 27), (24, 0, 24, 27), (50, 0, 24, 27), (78, 0, 21, 27), (104, 0, 19, 27)],
-				'../images/iceman_sprite.png'
+				'sprites/characters/iceman_sprite.png'
 			]
 		]
 		coords = characters[i-1][0] # list of coords
 		i_path = characters[i-1][1] # image path
-		
 		character = player.Player(self.helpers.get_spritesheet(i_path, coords))
-		
 		return character
 
 	def update(self):
