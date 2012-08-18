@@ -106,6 +106,7 @@ class Game:
 		self.text2 = font2.render('SPACE - Jump', True, (0,0,0), (255,255,255))
 		self.text3 = font2.render('SHIFT - Sprint', True, (0,0,0), (255,255,255))
 		self.text4 = font2.render('WASD - Move', True, (0,0,0), (255,255,255))
+		self.text5 = font2.render('R - Block', True, (0,0,0), (255,255,255))
 
 		self.text1Rect = self.text1.get_rect()
 		self.text1Rect.centerx = self.w - 200
@@ -122,11 +123,16 @@ class Game:
 		self.text4Rect = self.text4.get_rect()
 		self.text4Rect.centerx = self.w - 200
 		self.text4Rect.centery = 115
+		
+		self.text5Rect = self.text5.get_rect()
+		self.text5Rect.centerx = self.w - 200
+		self.text5Rect.centery = 130
 
 		self.screen.blit(self.text1, self.text1Rect)
 		self.screen.blit(self.text2, self.text2Rect)
 		self.screen.blit(self.text3, self.text3Rect)
 		self.screen.blit(self.text4, self.text4Rect)
+		self.screen.blit(self.text5, self.text5Rect)
         
 	def draw(self):
 		global groundY

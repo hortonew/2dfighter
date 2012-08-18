@@ -44,7 +44,6 @@ class Player(pygame.sprite.Sprite):
 			self.direction = -1
 		else:
 			self.direction = 1
-		print self.direction
 		if i == -1:
 			self.image = self.last_image
 		else:
