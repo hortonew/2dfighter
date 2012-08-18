@@ -126,28 +126,17 @@ class Game:
 		self.screen.blit(self.text2, self.text2Rect)
 		self.screen.blit(self.text3, self.text3Rect)
 		self.screen.blit(self.text4, self.text4Rect)
-
-    
         
 	def draw(self):
 		global groundY
 		ground = groundY + 27 # groundY plus height of player sprite
-		#clear the screen
-		self.screen.fill((255,255,255))
-
-		#write text on screen
-		self.setText()
-
-		#draw player on screen
-		self.screen.blit(self.p1.image, self.p1.rect)
-		pygame.draw.line(self.screen, (0,0,0), (000, ground), (800, ground))
+		self.screen.fill((255,255,255)) #clear the screen
+		self.setText() #write text on screen
+		self.screen.blit(self.p1.image, self.p1.rect) #draw player on screen
+		pygame.draw.line(self.screen, (0,0,0), (000, ground), (800, ground)) #draw line for ground
 
 	def handleEvents(self):
 		keys = pygame.key.get_pressed()  #checking pressed keys
-		#if keys[K_w]:
-		#self.keyDown(K_w)
-		#if keys[K_s]:
-		#self.keyDown(K_s)
 		if keys[K_a]:
 			self.keyDown(K_a)
 		elif keys[K_d]:
