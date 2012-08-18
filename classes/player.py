@@ -6,8 +6,12 @@ WINDOW_SIZE = (800, 600)
 class Player(pygame.sprite.Sprite):
 	def __init__(self, images):
 		pygame.sprite.Sprite.__init__(self)
+		
+		#running animation sprite
+		self.currentAnim = 0
+		
 		self.images = images
-		self.image = self.images[0]
+		self.image = self.images[self.currentAnim]
 		self.rect = self.image.get_rect().move([200, 300])
 
 		#an array to be filled with player's projectiles
@@ -96,6 +100,7 @@ class Player(pygame.sprite.Sprite):
 	def update(self):
 		#update the projectiles of this player:
 		purge = []
+		print self.currentAnim
 		for i, p in enumerate(self.projectiles):
 			p.update()	
 			#delete the projectile if it's off the screen
@@ -112,6 +117,6 @@ class Player(pygame.sprite.Sprite):
 				self.image = pygame.transform.flip(self.images[2], 1, 0)
 		if self.rect[1] >= groundY and self.image != self.images[3] and self.image != self.images[4]:
 			if self.direction == 1:
-				self.image = self.images[0]
+				self.image = self.images[self.currentAnim]
 			else:
-				self.image = pygame.transform.flip(self.images[0], 1, 0)
+				self.image = pygame.transform.flip(self.images[self.currentAnim], 1, 0)

@@ -46,8 +46,6 @@ class Game:
 	def keyUp(self, key):
 		#check if any key was released, but only set movement to false if no other movement key is pressed down
 
-		#update speed how to
-		#[speed], SpriteImage, 1 if x flip, 1 if y flip
 		if not self.p1.isBlocking:
 			if key == K_s:
 				#stand up
@@ -61,18 +59,25 @@ class Game:
 				#block
 				self.p1.isBlocking = False
 				self.p1.updateSpeed([0, 0], -1, 0, 0)
+		if not self.p1.isBlocking and not self.p1.isDucking:
+			if key == K_a or key == K_d:
+				self.p1.currentAnim = 0
 	
 	def keyDown(self, key):
-		#update speed how to
-		#[speed], SpriteImage, 1 if x flip, 1 if y flip
+		#reset animation loop
+		if self.p1.currentAnim > 1:
+			self.p1.currentAnim = 0
+
 		if not self.p1.isDucking:
 			if not self.p1.isBlocking:
 				if key == K_a:
 					#move left
-					self.p1.updateSpeed([-self.p1.x_speed, 0], 0, 1, 0)
+					self.p1.currentAnim += 1
+					self.p1.updateSpeed([-self.p1.x_speed, 0], self.p1.currentAnim, 1, 0)
 				elif key == K_d:
 					#move right
-					self.p1.updateSpeed([self.p1.x_speed, 0], 0, 0, 0)
+					self.p1.currentAnim += 1
+					self.p1.updateSpeed([self.p1.x_speed, 0], self.p1.currentAnim, 0, 0)
 				elif key == K_LCTRL:
 					self.p1.shoot()
 				elif key == K_LSHIFT:
