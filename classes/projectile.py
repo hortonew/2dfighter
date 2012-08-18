@@ -1,7 +1,7 @@
 import pygame
 LEFT = -1
 class Projectile(object):
-	def __init__(self, affected_by_gravity=False, rect=pygame.Rect((200,200,200,200)), color=(0,0,0), speed=5, x=100, y=100, direction=LEFT):
+	def __init__(self, affected_by_gravity=False, rect=pygame.Rect((200,200,200,200)), color=(255,0,0), speed=5, x=100, y=100, direction=LEFT):
 		self.rect = rect
 		self.color = color
 		self.speed = speed

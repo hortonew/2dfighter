@@ -6,6 +6,7 @@ from math import e, pi, cos, sin, sqrt
 from random import uniform
 from helpers import pygamehelper
 from classes import player
+import os
 
 WINDOW_SIZE = (800, 600)
 groundY = 300
@@ -21,6 +22,13 @@ class Game:
 		self.fps= 0
 		self.w, self.h = WINDOW_SIZE[0], WINDOW_SIZE[1]
 		self.helpers = pygamehelper.PygameHelper()
+		
+		#background images
+		mypath = os.path.dirname( os.path.realpath( __file__) )
+		self.starfield = pygame.image.load( os.path.join(mypath, 'images/backgrounds/starfield.png') ).convert_alpha()
+		self.starfield_rect = self.starfield.get_rect()
+		self.city = pygame.image.load( os.path.join(mypath, 'images/backgrounds/city.png') ).convert_alpha()
+		self.city_rect = self.city.get_rect().move([0, 200])
 		
 		#select which character for player one.  start at 1
 		self.p1 = self.select_character(1)
@@ -150,6 +158,11 @@ class Game:
 		global groundY
 		ground = groundY + 27 # groundY plus height of player sprite
 		self.screen.fill((255,255,255)) #clear the screen
+		
+		#reserved for background images
+		self.screen.blit(self.starfield, self.starfield_rect)
+		self.screen.blit(self.city, self.city_rect)
+		
 		self.setText() #write text on screen
 		self.screen.blit(self.p1.image, self.p1.rect) #draw player on screen
 		#draw the players projectiles:
