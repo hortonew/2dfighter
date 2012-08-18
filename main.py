@@ -50,46 +50,47 @@ class Game:
 		#update speed how to
 		#[speed], SpriteImage, 1 if x flip, 1 if y flip
 
-		#normal speed 
-		if key == K_LSHIFT:
-			self.p1.x_speed = self.p1.starting_x_speed
-		elif key == K_s:
+		if key == K_s:
 			#stand up
+			self.p1.isDucking = False
 			self.p1.speed = [0,0]
 			self.p1.updateSpeed([0, 0], -1, 0, 0)
-		elif key == K_r:
-			#block
-			self.p1.speed = [0,0]
-			self.p1.updateSpeed([0, 0], -1, 0, 0)
+		if not self.p1.isDucking:
+			if key == K_LSHIFT:
+				#normal speed 
+				self.p1.x_speed = self.p1.starting_x_speed
+			elif key == K_r:
+				#block
+				self.p1.speed = [0,0]
+				self.p1.updateSpeed([0, 0], -1, 0, 0)
 	
 	def keyDown(self, key):
 		#update speed how to
 		#[speed], SpriteImage, 1 if x flip, 1 if y flip
+		if not self.p1.isDucking:
+			if key == K_a:
+				#move left
+				self.p1.updateSpeed([-self.p1.x_speed, 0], 0, 1, 0)
+			elif key == K_d:
+				#move right
+				self.p1.updateSpeed([self.p1.x_speed, 0], 0, 0, 0)
+			elif key == K_LSHIFT:
+				#sprint
+				self.p1.x_speed = 15
+			elif key == K_r:
+				#block
+				self.p1.speed = [0,0]
+				self.p1.updateSpeed([0, 0], 4, 0, 0)
 		if key == K_s:
-			#move down
+			#duck
+			self.p1.isDucking = True
 			self.p1.speed = [0,0]
 			self.p1.updateSpeed([0, 0], 3, 0, 0)
-		elif key == K_w:
-			#move up
-			pass
-		elif key == K_a:
-			#move left
-			self.p1.updateSpeed([-self.p1.x_speed, 0], 0, 1, 0)
-		elif key == K_d:
-			#move right
-			self.p1.updateSpeed([self.p1.x_speed, 0], 0, 0, 0)
 		elif key == K_SPACE:
 			#jump
 			if self.p1.isJumping != True:
 				self.p1.vSpeed = -self.p1.jumpForce
 				self.p1.isJumping = True
-		elif key == K_LSHIFT:
-			#sprint
-			self.p1.x_speed = 15
-		elif key == K_r:
-			#block
-			self.p1.speed = [0,0]
-			self.p1.updateSpeed([0, 0], 4, 0, 0)
             
 	def mouseUp(self, button, pos):
 		pass

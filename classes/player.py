@@ -19,8 +19,8 @@ class Player(pygame.sprite.Sprite):
 		#current speed of player
 		self.speed = [0, 0]
 		
-		#self.jump_height = 30
 		self.isJumping = False
+		self.isDucking = False
 		
 		#acceleration of player in upward direction
 		self.vSpeed = 0
