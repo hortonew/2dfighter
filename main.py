@@ -5,8 +5,7 @@ from pygame.locals import *
 from math import e, pi, cos, sin, sqrt
 from random import uniform
 from helpers import pygamehelper
-from classes import player
-import os
+from classes import player, background
 
 WINDOW_SIZE = (800, 600)
 groundY = 300
@@ -22,13 +21,7 @@ class Game:
 		self.fps= 0
 		self.w, self.h = WINDOW_SIZE[0], WINDOW_SIZE[1]
 		self.helpers = pygamehelper.PygameHelper()
-		
-		#background images
-		mypath = os.path.dirname( os.path.realpath( __file__) )
-		self.starfield = pygame.image.load( os.path.join(mypath, 'images/backgrounds/starfield.png') ).convert_alpha()
-		self.starfield_rect = self.starfield.get_rect()
-		self.city = pygame.image.load( os.path.join(mypath, 'images/backgrounds/city.png') ).convert_alpha()
-		self.city_rect = self.city.get_rect().move([0, 200])
+		self.background = background.Background()
 		
 		#select which character for player one.  start at 1
 		self.p1 = self.select_character(1)
@@ -155,8 +148,8 @@ class Game:
 		self.screen.blit(self.text6, self.text6Rect)
 	
 	def setBackground(self):
-		self.screen.blit(self.starfield, self.starfield_rect)
-		self.screen.blit(self.city, self.city_rect)
+		self.screen.blit(self.background.top, self.background.top_rect)
+		self.screen.blit(self.background.middle, self.background.middle_rect)
         
 	def draw(self):
 		global groundY
