@@ -53,7 +53,6 @@ class Game:
 		if key == K_s:
 			#stand up
 			self.p1.isDucking = False
-			self.p1.speed = [0,0]
 			self.p1.updateSpeed([0, 0], -1, 0, 0)
 		if not self.p1.isDucking:
 			if key == K_LSHIFT:
@@ -61,7 +60,6 @@ class Game:
 				self.p1.x_speed = self.p1.starting_x_speed
 			elif key == K_r:
 				#block
-				self.p1.speed = [0,0]
 				self.p1.updateSpeed([0, 0], -1, 0, 0)
 	
 	def keyDown(self, key):
@@ -79,12 +77,10 @@ class Game:
 				self.p1.x_speed = 15
 			elif key == K_r:
 				#block
-				self.p1.speed = [0,0]
 				self.p1.updateSpeed([0, 0], 4, 0, 0)
 		if key == K_s:
 			#duck
 			self.p1.isDucking = True
-			self.p1.speed = [0,0]
 			self.p1.updateSpeed([0, 0], 3, 0, 0)
 		elif key == K_SPACE:
 			#jump

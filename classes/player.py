@@ -16,6 +16,9 @@ class Player(pygame.sprite.Sprite):
 		self.starting_x_speed = 9
 		self.x_speed = 9
 		
+		#controls which way the player is looking
+		self.direction = 1
+		
 		#current speed of player
 		self.speed = [0, 0]
 		
@@ -36,6 +39,11 @@ class Player(pygame.sprite.Sprite):
 		
 	def updateSpeed(self, spd, i, x, y):
 		#return to previous state (usually after a jump, or possibly attack)
+		if self.speed[0] < 0:
+			self.direction = -1
+		else:
+			self.direction = 1
+		print self.direction
 		if i == -1:
 			self.image = self.last_image
 		else:
@@ -55,7 +63,8 @@ class Player(pygame.sprite.Sprite):
 			self.speed[1] = spd[1]
 		
 		#move the player
-		self.rect = self.rect.move(self.speed)
+		if spd != [0,0]:
+			self.rect = self.rect.move(self.speed)
 		
 	def jump(self):
 		global gravity
@@ -83,8 +92,8 @@ class Player(pygame.sprite.Sprite):
 				self.image = self.images[2]
 			else:
 				self.image = pygame.transform.flip(self.images[2], 1, 0)
-		if self.rect[1] >= groundY and self.image != self.images[3]:
-			if self.speed[0] > 0:
+		if self.rect[1] >= groundY and self.image != self.images[3] and self.image != self.images[4]:
+			if self.direction == 1:
 				self.image = self.images[0]
 			else:
 				self.image = pygame.transform.flip(self.images[0], 1, 0)
