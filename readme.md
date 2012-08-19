@@ -1,5 +1,5 @@
-All game dev files.
-
+2dfighter
+Contributors: hortonew, mccolgst
 
 
 1st Screenshot
