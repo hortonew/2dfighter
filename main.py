@@ -5,7 +5,7 @@ from pygame.locals import *
 from math import e, pi, cos, sin, sqrt
 from random import uniform
 from helpers import pygamehelper
-from classes import player, background
+from classes import player, background, gametext
 
 WINDOW_SIZE = (800, 600)
 groundY = 300
@@ -22,6 +22,7 @@ class Game:
 		self.w, self.h = WINDOW_SIZE[0], WINDOW_SIZE[1]
 		self.helpers = pygamehelper.PygameHelper()
 		self.background = background.Background()
+		self.gametext = gametext.GameText()
 		
 		#select which character for player one.  start at 1
 		self.p1 = self.select_character(1)
@@ -73,7 +74,8 @@ class Game:
 		#reset animation loop
 		if self.p1.currentAnim > 1:
 			self.p1.currentAnim = 0
-			
+		
+		#if you press numpad 1 or 2, swap iceman sprites
 		if key == K_KP1:
 			self.p1 = self.select_character(1)
 		elif key == K_KP2:
@@ -115,47 +117,10 @@ class Game:
 	def mouseMotion(self, buttons, pos, rel):
 		pass
         
-	#create and display all font on screen
+	#Display all text on screen
 	def setText(self):
-		font = pygame.font.Font(None, 36)
-		font2 = pygame.font.Font(None, 20)
-		self.text1 = font.render('Controls', True, (0,0,0), (255,255,255))
-		self.text2 = font2.render('SPACE - Jump', True, (0,0,0), (255,255,255))
-		self.text3 = font2.render('SHIFT - Sprint', True, (0,0,0), (255,255,255))
-		self.text4 = font2.render('WASD - Move', True, (0,0,0), (255,255,255))
-		self.text5 = font2.render('R - Block', True, (0,0,0), (255,255,255))
-		self.text6 = font2.render('CTRL - Shoot', True, (0,0,0), (255,255,255))
-
-		self.text1Rect = self.text1.get_rect()
-		self.text1Rect.centerx = self.w - 200
-		self.text1Rect.centery = 50
-
-		self.text2Rect = self.text2.get_rect()
-		self.text2Rect.centerx = self.w - 200
-		self.text2Rect.centery = 75
-
-		self.text3Rect = self.text3.get_rect()
-		self.text3Rect.centerx = self.w - 200
-		self.text3Rect.centery = 95
-
-		self.text4Rect = self.text4.get_rect()
-		self.text4Rect.centerx = self.w - 200
-		self.text4Rect.centery = 115
-		
-		self.text5Rect = self.text5.get_rect()
-		self.text5Rect.centerx = self.w - 200
-		self.text5Rect.centery = 130
-
-		self.text6Rect = self.text6.get_rect()
-		self.text6Rect.centerx = self.w - 200
-		self.text6Rect.centery = 145
-
-		self.screen.blit(self.text1, self.text1Rect)
-		self.screen.blit(self.text2, self.text2Rect)
-		self.screen.blit(self.text3, self.text3Rect)
-		self.screen.blit(self.text4, self.text4Rect)
-		self.screen.blit(self.text5, self.text5Rect)
-		self.screen.blit(self.text6, self.text6Rect)
+		for text in self.gametext.textobjects:
+			self.screen.blit(text[0], text[1])
 	
 	def setBackground(self):
 		self.screen.blit(self.background.top, self.background.top_rect)
