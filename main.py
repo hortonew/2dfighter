@@ -33,6 +33,11 @@ class Game:
 				#character 1
 				[(0, 0, 22, 27), (24, 0, 24, 27), (50, 0, 24, 27), (78, 0, 21, 27), (104, 0, 19, 27)],
 				'sprites/characters/iceman_sprite.png'
+			],
+			[
+				#character 2
+				[(0, 0, 22, 27), (24, 0, 24, 27), (50, 0, 24, 27), (78, 0, 21, 27), (104, 0, 19, 27)],
+				'sprites/characters/iceman_sprite_red.png'
 			]
 		]
 		coords = characters[i-1][0] # list of coords
@@ -68,6 +73,11 @@ class Game:
 		#reset animation loop
 		if self.p1.currentAnim > 1:
 			self.p1.currentAnim = 0
+			
+		if key == K_KP1:
+			self.p1 = self.select_character(1)
+		elif key == K_KP2:
+			self.p1 = self.select_character(2)
 
 		if not self.p1.isDucking:
 			if not self.p1.isBlocking:
