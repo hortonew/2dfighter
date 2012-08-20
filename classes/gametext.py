@@ -11,6 +11,7 @@ class GameText:
 		self.textobjects.append(self.get_text('WASD - Move', (0,0,0), (255,255,255), 600, 115, 20))
 		self.textobjects.append(self.get_text('R - Block', (0,0,0), (255,255,255), 600, 130, 20))
 		self.textobjects.append(self.get_text('CTRL - Shoot', (0,0,0), (255,255,255), 600, 145, 20))
+		self.textobjects.append(self.get_text('J - Punch', (0,0,0), (255,255,255), 600, 160, 20))
 		
 		#Player 1 health
 		self.textobjects.append(self.get_text('Player 1 Health', (0,0,0), (255,255,255), 200, 50, 20))
