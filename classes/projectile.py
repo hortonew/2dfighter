@@ -11,6 +11,6 @@ class Projectile(object):
 		self.rect.y = y
 	def update(self):
 		if self.direction == LEFT:
-			self.rect.x += self.speed
-		else:
 			self.rect.x -= self.speed
+		else:
+			self.rect.x += self.speed

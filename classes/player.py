@@ -75,7 +75,7 @@ class Player(pygame.sprite.Sprite):
 		if spd != [0,0]:
 			self.rect = self.rect.move(self.speed)
 	def shoot(self):
-		self.projectiles.append(projectile.Projectile(affected_by_gravity=False, x=self.rect.x, y=self.rect.y, direction=-1, rect=pygame.rect.Rect(self.rect.x,self.rect.y,10,10)))
+		self.projectiles.append(projectile.Projectile(affected_by_gravity=False, x=self.rect.x, y=self.rect.y, direction=self.direction, rect=pygame.rect.Rect(self.rect.x,self.rect.y,10,10)))
 
 		
 	def jump(self):
