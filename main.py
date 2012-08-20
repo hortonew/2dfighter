@@ -66,6 +66,10 @@ class Game:
 				#block
 				self.p1.isBlocking = False
 				self.p1.updateSpeed([0, 0], -1, 0, 0)
+				if self.p1.health == 0:
+					self.p1.health = 100
+				else:
+					self.p1.health -= 5
 		if not self.p1.isBlocking and not self.p1.isDucking:
 			if key == K_a or key == K_d:
 				self.p1.currentAnim = 0
@@ -119,6 +123,8 @@ class Game:
         
 	#Display all text on screen
 	def setText(self):
+		p1_health = self.gametext.get_text(str(self.p1.health), (255,0,0), (255,255,255), 200, 75, 20)
+		self.screen.blit(p1_health[0], p1_health[1])
 		for text in self.gametext.textobjects:
 			self.screen.blit(text[0], text[1])
 	

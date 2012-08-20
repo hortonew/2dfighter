@@ -35,6 +35,9 @@ class Player(pygame.sprite.Sprite):
 		self.isDucking = False
 		self.isBlocking = False
 		
+		#stats
+		self.health = 100
+		
 		#acceleration of player in upward direction
 		self.vSpeed = 0
 		
