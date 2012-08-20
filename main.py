@@ -91,7 +91,7 @@ class Game:
 					#move right
 					self.p1.currentAnim += 1
 					self.p1.updateSpeed([self.p1.x_speed, 0], self.p1.currentAnim, 0, 0)
-				elif key == K_LCTRL:
+				elif key == K_LCTRL or key == K_RCTRL:
 					self.p1.shoot()
 				elif key == K_LSHIFT:
 					#sprint
