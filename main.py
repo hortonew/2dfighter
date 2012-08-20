@@ -32,12 +32,12 @@ class Game:
 		characters = [
 			[
 				#character 1
-				[(0, 0, 22, 27), (24, 0, 24, 27), (50, 0, 24, 27), (78, 0, 21, 27), (104, 0, 19, 27)],
+				[(0, 0, 22, 27), (24, 0, 24, 27), (50, 0, 24, 27), (78, 0, 21, 27), (104, 0, 19, 27), (125, 0, 22, 27)],
 				'sprites/characters/iceman_sprite.png'
 			],
 			[
 				#character 2
-				[(0, 0, 22, 27), (24, 0, 24, 27), (50, 0, 24, 27), (78, 0, 21, 27), (104, 0, 19, 27)],
+				[(0, 0, 22, 27), (24, 0, 24, 27), (50, 0, 24, 27), (78, 0, 21, 27), (104, 0, 19, 27), (125, 0, 22, 27)],
 				'sprites/characters/iceman_sprite_red.png'
 			]
 		]
@@ -73,6 +73,9 @@ class Game:
 		if not self.p1.isBlocking and not self.p1.isDucking:
 			if key == K_a or key == K_d:
 				self.p1.currentAnim = 0
+			elif key == K_j:
+					#punch
+					self.p1.updateSpeed([0, 0], -1, 0, 0)
 	
 	def keyDown(self, key):
 		#reset animation loop
@@ -100,6 +103,12 @@ class Game:
 				elif key == K_LSHIFT:
 					#sprint
 					self.p1.x_speed = 15
+				elif key == K_j:
+					#punch
+					if self.p1.direction == 1:
+						self.p1.updateSpeed([0, 0], 5, 0, 0)
+					else:
+						self.p1.updateSpeed([0, 0], 5, 1, 0)
 			if key == K_r:
 				#block
 				self.p1.isBlocking = True

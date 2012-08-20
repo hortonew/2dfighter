@@ -17,9 +17,6 @@ class Player(pygame.sprite.Sprite):
 		#an array to be filled with player's projectiles
 		self.projectiles = []
 		
-		#last image to return to after odd movements like jumping
-		self.last_image = self.image
-		
 		#controls how fast to the right and left the player can move.
 		#starting_x_speed allows the x_speed to return to normal after sprinting
 		self.starting_x_speed = 9
@@ -56,11 +53,13 @@ class Player(pygame.sprite.Sprite):
 			self.direction = -1
 		else:
 			self.direction = 1
+		#return to normal
 		if i == -1:
-			self.image = self.last_image
+			if self.direction == 1:
+				self.image = self.images[1]
+			else:
+				self.image = self.image = pygame.transform.flip(self.images[1], 1, 0)
 		else:
-			#store the current image as the last image to revert back to later
-			self.last_image = self.image
 			if x == 0:
 				#set sprite image to image in spritesheet
 				self.image = self.images[i]
@@ -77,9 +76,9 @@ class Player(pygame.sprite.Sprite):
 		#move the player
 		if spd != [0,0]:
 			self.rect = self.rect.move(self.speed)
+
 	def shoot(self):
 		self.projectiles.append(projectile.Projectile(affected_by_gravity=False, x=self.rect.x, y=self.rect.y, direction=self.direction, rect=pygame.rect.Rect(self.rect.x,self.rect.y,10,10)))
-
 		
 	def jump(self):
 		global gravity
@@ -117,7 +116,7 @@ class Player(pygame.sprite.Sprite):
 				self.image = self.images[2]
 			else:
 				self.image = pygame.transform.flip(self.images[2], 1, 0)
-		if self.rect[1] >= groundY and self.image != self.images[3] and self.image != self.images[4]:
+		if self.rect[1] >= groundY and self.image != self.images[3] and self.image != self.images[4] and self.image != self.images[5]:
 			if self.direction == 1:
 				self.image = self.images[self.currentAnim]
 			else:
