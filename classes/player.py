@@ -110,12 +110,15 @@ class Player(pygame.sprite.Sprite):
 		for i in reversed(purge):
 			del(self.projectiles[i])
 
+		#jump code
 		if self.isJumping == True:
 			self.jump()
-			if self.speed[0] > 0:
+			if self.direction ==1:
 				self.image = self.images[2]
 			else:
 				self.image = pygame.transform.flip(self.images[2], 1, 0)
+
+		#if none of the moves/jump/block, run through running animation
 		if self.rect[1] >= groundY and self.image != self.images[3] and self.image != self.images[4] and self.image != self.images[5]:
 			if self.direction == 1:
 				self.image = self.images[self.currentAnim]

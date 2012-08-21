@@ -51,8 +51,6 @@ class Game:
 		self.p1.update()
     
 	def keyUp(self, key):
-		#check if any key was released, but only set movement to false if no other movement key is pressed down
-
 		if not self.p1.isBlocking:
 			if key == K_s:
 				#stand up
@@ -74,7 +72,7 @@ class Game:
 			if key == K_a or key == K_d:
 				self.p1.currentAnim = 0
 			elif key == K_j:
-					#punch
+					#release punch
 					self.p1.updateSpeed([0, 0], -1, 0, 0)
 	
 	def keyDown(self, key):
@@ -137,6 +135,7 @@ class Game:
 		for text in self.gametext.textobjects:
 			self.screen.blit(text[0], text[1])
 	
+	#Display all background images
 	def setBackground(self):
 		self.screen.blit(self.background.top, self.background.top_rect)
 		self.screen.blit(self.background.middle, self.background.middle_rect)
