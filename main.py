@@ -51,29 +51,7 @@ class Game:
 		self.p1.update()
     
 	def keyUp(self, key):
-		if not self.p1.isBlocking:
-			if key == K_s:
-				#stand up
-				self.p1.isDucking = False
-				self.p1.updateSpeed([0, 0], -1, 0, 0)
-		if not self.p1.isDucking:
-			if key == K_LSHIFT:
-				#normal speed 
-				self.p1.x_speed = self.p1.starting_x_speed
-			elif key == K_r:
-				#block
-				self.p1.isBlocking = False
-				self.p1.updateSpeed([0, 0], -1, 0, 0)
-				if self.p1.health == 0:
-					self.p1.health = 100
-				else:
-					self.p1.health -= 5
-		if not self.p1.isBlocking and not self.p1.isDucking:
-			if key == K_a or key == K_d:
-				self.p1.currentAnim = 0
-			elif key == K_j:
-					#release punch
-					self.p1.updateSpeed([0, 0], -1, 0, 0)
+		self.p1.currentAnim = 0
 	
 	def keyDown(self, key):
 		#reset animation loop
@@ -102,15 +80,12 @@ class Game:
 					#sprint
 					self.p1.x_speed = 15
 				elif key == K_j:
-					#punch
-					if self.p1.direction == 1:
-						self.p1.updateSpeed([0, 0], 5, 0, 0)
-					else:
-						self.p1.updateSpeed([0, 0], 5, 1, 0)
+					self.p1.punch()
+					
 			if key == K_r:
 				#block
-				self.p1.isBlocking = True
-				self.p1.updateSpeed([0, 0], 4, 0, 0)
+				self.p1.block()
+
 		if not self.p1.isBlocking:
 			if key == K_s:
 				#duck

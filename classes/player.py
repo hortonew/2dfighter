@@ -3,6 +3,7 @@ import projectile
 gravity = 1.3
 groundY = 300
 WINDOW_SIZE = (800, 600)
+PUNCHING_IMAGE = 5
 class Player(pygame.sprite.Sprite):
 	def __init__(self, images):
 		pygame.sprite.Sprite.__init__(self)
@@ -58,7 +59,7 @@ class Player(pygame.sprite.Sprite):
 			if self.direction == 1:
 				self.image = self.images[1]
 			else:
-				self.image = self.image = pygame.transform.flip(self.images[1], 1, 0)
+				self.image = pygame.transform.flip(self.images[1], 1, 0)
 		else:
 			if x == 0:
 				#set sprite image to image in spritesheet
@@ -77,8 +78,23 @@ class Player(pygame.sprite.Sprite):
 		if spd != [0,0]:
 			self.rect = self.rect.move(self.speed)
 
+	def do_animation(self, index):
+		self.currentAnim = index
+		self.image = self.images[self.currentAnim]
+		if self.direction == -1:
+			self.image = pygame.transform.flip(self.images[self.currentAnim], 1, 0)
+
+	def punch(self):
+		self.do_animation(5)
+		#put any life/damage/etc code here
+
 	def shoot(self):
 		self.projectiles.append(projectile.Projectile(affected_by_gravity=False, x=self.rect.x, y=self.rect.y, direction=self.direction, rect=pygame.rect.Rect(self.rect.x,self.rect.y,10,10)))
+
+	def block(self):
+		self.do_animation(4)
+		#put any life/damage/etc code here
+
 		
 	def jump(self):
 		global gravity
@@ -100,6 +116,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect = self.rect.move(0, self.vSpeed)
 
 	def update(self):
+		print self.currentAnim
 		#update the projectiles of this player:
 		purge = []
 		for i, p in enumerate(self.projectiles):
@@ -110,6 +127,15 @@ class Player(pygame.sprite.Sprite):
 		for i in reversed(purge):
 			del(self.projectiles[i])
 
+		#return to normal state
+		if self.direction == 1:
+			#self.image = self.images[1]
+			self.image = self.images[self.currentAnim]
+		else:
+			#self.image = pygame.transform.flip(self.images[1], 1, 0)
+			self.image = pygame.transform.flip(self.images[self.currentAnim], 1, 0)
+
+
 		#jump code
 		if self.isJumping == True:
 			self.jump()
@@ -118,9 +144,12 @@ class Player(pygame.sprite.Sprite):
 			else:
 				self.image = pygame.transform.flip(self.images[2], 1, 0)
 
-		#if none of the moves/jump/block, run through running animation
+
+		'''#if none of the moves/jump/block, run through running animation
 		if self.rect[1] >= groundY and self.image != self.images[3] and self.image != self.images[4] and self.image != self.images[5]:
 			if self.direction == 1:
 				self.image = self.images[self.currentAnim]
 			else:
 				self.image = pygame.transform.flip(self.images[self.currentAnim], 1, 0)
+		'''
+		
