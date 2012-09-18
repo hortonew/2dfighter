@@ -51,6 +51,9 @@ class Game:
 		self.p1.update()
     
 	def keyUp(self, key):
+		#stop sprinting
+		if key == K_LSHIFT:
+			self.p1.x_speed = self.p1.starting_x_speed
 		self.p1.currentAnim = 0
 	
 	def keyDown(self, key):
@@ -89,8 +92,7 @@ class Game:
 		if not self.p1.isBlocking:
 			if key == K_s:
 				#duck
-				self.p1.isDucking = True
-				self.p1.updateSpeed([0, 0], 3, 0, 0)
+				self.p1.duck()
 			elif key == K_SPACE:
 				#jump
 				if self.p1.isJumping != True:
